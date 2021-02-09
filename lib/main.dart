@@ -20,7 +20,7 @@ class LoadHtml extends State<Html> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('r01, L27. HTML Code in Flutter')),
+      appBar: AppBar(title: Text('r01, L29. flutter_webview_plugin')),
       body: WebviewScaffold(
         url: new Uri.dataFromString(html, mimeType: 'text/html').toString(),
       ),
@@ -47,24 +47,28 @@ String html = '' +
     '  }' +
     '  function _onBScroll() {' +
     '    var body_tag = document.getElementById("body_tag");' +
-    '    _setCounter(body_tag.scrollTop);' +
+    '    _setCounter(Math.round(body_tag.scrollTop));' +
     '  }' +
     '  function _gotoPos1(pos) {' +
     '    window.scrollTo(0, pos);' +
     '  }' +
-    '  function _gotoPos2(pos) {' +
+    '  function _gotoBodyTag(pos) {' +
     '    var body_tag = document.getElementById("body_tag");' +
     '    if (body_tag.scrollTo == undefined) {' +
-    '      alert(\'No new scrollTo !\');' +
-    '    } else { body_tag.scrollTo({top: pos}); }' +
+    '      alert(\'body_tag.scrollTo() not supported.\');' +
+    '    } else { ' +
+    '      body_tag.scrollTo({top: pos}); ' +
+    '    }' +
     '  }' +
     '</script>' +
     '<body id="body_tag" style="background-color:lightgreen" onscroll="_onBScroll();" >' +
-    '<button onclick="_setCounter(77); alert(22);">Test1</button><br/>' +
+    'L29, r01. &nbsp;&nbsp;&nbsp;&nbsp;<button onclick="_setCounter(77); alert(22);">alert(22)</button><br/>' +
     lines(15) +
     '<hr/><div id="counter_tag" style="font-size:22px; color:red;">0</div>' +
-    '<button onclick="_gotoPos1(221);">Go to 221...</button>&nbsp;&nbsp;&nbsp;&nbsp;' +
-    '<button onclick="_gotoPos2(122);">Go to 122...</button><hr/>' +
+    '<button onclick="_gotoPos1(0);">Go top</button>&nbsp;&nbsp;&nbsp;&nbsp;' +
+    '<button onclick="_gotoPos1(221);">Go to 221 /w</button>&nbsp;&nbsp;&nbsp;&nbsp;' +
+    '<button onclick="_gotoBodyTag(122);">Go to 122 /b</button>&nbsp;&nbsp;&nbsp;&nbsp;' +
+    '<hr/>' +
     lines(25, 101) +
     '<p> Sample Paragraph Tag </p>' +
     '</body>' +
